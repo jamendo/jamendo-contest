@@ -8,11 +8,11 @@ The Jamendo API contest starts 11th April 2013 and ends the 9th june 2013.
 To participate in the contest and get started, follow this steps: 
 ---------------------------------------------------------------------
 
-1. Read our contest FAQ http://developer.jamendo.com/contest/faq to be sure you undertsand what the contest is about.
-2. Read the terms and conditions http://developer.jamendo.com/contest/termsandconditions carefully.
-3. Go to http://developer.jamendo.com/contest/register and register yourself or your team to the Jamendo API contest.
-4. Go to https://devportal.jamendo.com/ and signup for a Jamendo API account.
-5. Fork this repository to your individual or team organization account.
+1. Fork this Github repository https://github.com/jamendo/jamendo-contest to your individual or team organization account.
+2. Read our contest FAQ http://developer.jamendo.com/contest/faq to be sure you undertsand what the contest is about.
+3. Read the terms and conditions http://developer.jamendo.com/contest/termsandconditions carefully.
+4. Go to http://developer.jamendo.com/contest/register and register yourself or your team to the Jamendo API contest.
+5. Go to https://devportal.jamendo.com/ and signup for a Jamendo API account.
 6. Create a configuration file in your repository, for example "jamendo_api_credentials.conf", then add the path to that configuration in your .gitignore file.
 7. Put the values "Client ID" and "Client Secret" you got when signing up for a Jamendo API account into the configuration file.
 8. Add a License.txt to your project containing an opensource license of your choice.

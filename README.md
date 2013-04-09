@@ -5,7 +5,7 @@ Jamendo API contest repository
 
 The Jamendo API contest starts 11th April 2013 and ends the 9th june 2013.
 
-To get participate in the contest and get started, follow this steps: 
+To participate in the contest and get started, follow this steps: 
 ---------------------------------------------------------------------
 
 1. Read our contest FAQ http://developer.jamendo.com/contest/faq to be sure you undertsand what the contest is about.
@@ -27,5 +27,7 @@ Before the end of the contest:
 The Jamendo API contest is Copyright (c) 2013 Jamendo, released under the MIT License.
 
 Sponsored by:
+
 <img src="http://www.3scale.net/wp-content/uploads/2012/03/logo-3scale.png" height="60">
+
 <img src="https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/GitHub-Logo.png?1361400666" height="60">

@@ -10,7 +10,7 @@ You must use the new Jamendo API v3.0 (http://api.jamendo.com/v3.0) to create yo
 To participate in the contest and get started, follow these steps: 
 ---------------------------------------------------------------------
 
-1. Fork this Github repository https://github.com/jamendo/jamendo-contest to your individual or team organization account.
+1. Fork this GitHub repository https://github.com/jamendo/jamendo-contest to your individual or team organization account.
 2. Read our contest guidelines http://developer.jamendo.com/contest/guidelines to be sure you understand what the contest is about.
 3. Read the contest rules http://developer.jamendo.com/contest/rules carefully.
 4. Go to http://developer.jamendo.com/contest/register and register yourself or your team to the Jamendo App Contest.

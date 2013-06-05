@@ -1,0 +1,178 @@
+/* =============================================================================
+   FONTS
+   ========================================================================== */
+@font-face {
+    font-family: 'akzidenz_cond';
+    src: url('../fonts/akzidenzgrotesk-cond-webfont.eot');
+    src: url('../fonts/akzidenzgrotesk-cond-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/akzidenzgrotesk-cond-webfont.woff') format('woff'),
+         url('../fonts/akzidenzgrotesk-cond-webfont.ttf') format('truetype'),
+         url('../fonts/akzidenzgrotesk-cond-webfont.svg#akzidenz-grotesk_bq_condensRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* =============================================================================
+   DEBUG IE, FF
+   ========================================================================== */
+
+
+
+/* =============================================================================
+   GENERAL RULES
+   ========================================================================== */
+
+.float { float: left;}
+.clear { clear: both;}
+.hidden { display:none;}
+.constr { border:dotted 1px black;}
+.left { float: left;}
+.inline {display:inline-block;}
+.center { margin:0 auto; width:960px;}
+.height {height: 1px;}
+
+
+a { color:303030; }
+a.active {}
+
+/* CSS3 Animation */
+.red_stripped,
+.green_stripped,
+.header_content,
+.biography a {transition: all 0.6s; -webkit-transition: all 0.6s; -moz-transition: all 0.6s; -o-transition: all 0.6s; -ms-transition: all 0.6s;}
+
+.red_stripped {background: url('../img/red_stripped.jpg'); text-shadow:0px 0px 3px rgba(0,0,0,0.5);}
+  .red_stripped:hover {background: url('../img/red_stripped.jpg') 100px 0px; box-shadow:0px 0px 3px rgba(0,0,0,0.5);}
+.green_stripped {background: url('../img/green_stripped.jpg'); text-shadow:0px 0px 3px rgba(0,0,0,0.5);}
+  .green_stripped:hover {background: url('../img/green_stripped.jpg') 100px 0px; box-shadow:0px 0px 3px rgba(0,0,0,0.5);}
+/* =============================================================================
+   UI FONDATION OVERRIDE
+   ========================================================================== */
+
+ h1, h2, h3, h4, h5, h6, input { font-family: 'akzidenz_cond'; }
+
+/* =============================================================================
+   HOME PAGE 
+   ========================================================================== */
+html { height: 100%;}
+body { background: #e7e5ce; font-family: 'akzidenz_cond', arial; color:#303030; line-height: 22px; height:100%;}
+  #page { position:relative; min-height:100%; }
+    .top-bar {position: relative;}
+    .header_content {width:135px; position: relative; z-index:3;}
+
+      .logo { text-align: center; position: relative; z-index: 2;}
+      .top-bar .glossy_header { height:50px; display: block; position:absolute; top:50px; background:#212121; width: 100%; min-width: 960px; }
+      .top-bar .red_bar { height:3px; display: block; position:absolute; top: 100px; background:#e95a4c; width:100%; min-width: 960px; }
+
+      .header_form {display: none; position: absolute; right:0px; margin-top:23px;}
+      .header_form input[type="text"] {padding-top: 0px;height: 38px;border: 2px solid #e95a4c;width: 220px;font-size: 20px; }
+      .header_form input[type="submit"] {padding-top: 1px;height: 38px;width: 70px;font-size: 20px;text-transform: uppercase;font-size: 20px;color: white;border: none; }
+      .header_form input[type="submit"]:hover {}
+
+    .content {position: relative; display: block;}
+      .home { position: relative;  }
+        .hp_form_wrapper {height:240px; width:584px; padding:45px 42px; background: #e7e5ce; position: relative; z-index: 2; }
+          .hp_slogan {text-align: center;}
+            .hp_slogan h1 { font-size:30px; border-top:2px solid #e95a4c; border-bottom:2px solid #e95a4c; padding:5px 0px 2px 0px; display: inline-block; }
+            .slogan_decoration {display:inline-block; position: relative; margin-top: 16px; background: url('../img/decoration_title.png'); width:25px; height:20px;}
+              .slogan_decoration.left {background-position: 0px 0px; left: 30px; }
+              .slogan_decoration.right {background-position: -25px 0px; right: 30px;}
+          .hp_form { margin-top: 35px;}
+            .hp_form input[type="text"] {padding-top: 15px;  height: 70px; border: 4px solid #e95a4c; width: 400px; font-size: 23px;}
+            .hp_form input[type="submit"] {padding-top: 5px; height: 70px; width:100px; font-size:20px; text-transform:uppercase; font-size: 25px; color: white;  border: none; }
+        .men { position: absolute; top: 0px;}      
+          .man {display: block; width:13px; height:31px; margin:1px 4px; float: left; background:url('../img/sprite_dancer.png') 0px 0px;}
+
+      .footer { height:24px; width:100%; background:black; position: relative; letter-spacing:1px;   }
+      .footer .red_bar { height:3px; display: block; position:absolute; top: -3px; background:#e95a4c; width:100%;} 
+      .footer .text,.footer .text a { color: white; font-size: 14px; text-align: center; padding-top: 2px; } 
+      .footer .text a { color: white; font-size: 14px; text-align: center; padding-top: 2px; text-decoration: underline;} 
+
+/* =============================================================================
+   LOADING PAGE
+   ========================================================================== */
+    @-webkit-keyframes rotate {
+      from {
+        -webkit-transform: rotate(0deg);
+      }
+      to { 
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @-webkit-keyframes rotate-inversed {
+      from {
+        -webkit-transform: rotate(0deg);
+      }
+      to { 
+        -webkit-transform: rotate(-360deg);
+      }
+    }
+
+  .loader_spin {
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-timing-function:linear;
+  }
+
+  .spin_2 { -webkit-animation-duration:0.6s; -webkit-animation-name:rotate;}
+  .spin_1 { -webkit-animation-duration:2s; -webkit-animation-name:rotate-inversed;}
+
+   .loading.content { text-align: center;}
+      .loader {position: relative; width:197px; height:197px; }
+        .loader .loader_spin.spin_1 { background:url('../img/loader3exp.png') 190px 0px; width:185px; height:185px; display:block; position: absolute; top: 0px; z-index: 2;}
+        .loader .loader_spin.spin_2 { background:url('../img/loader3exp.png') 377px 0px; width:185px; height:185px; display:block; position: absolute; top: 0px; z-index: 3;}
+        .loader .loader_logo { background:url('../img/loader3exp.png'); width:185px; height:185px; display: block; position: absolute; top: 0px; z-index: 1;}
+      
+      .loading.content h3 { margin-top: 20px;}
+
+/* =============================================================================
+   LIST PAGE
+   ========================================================================== */
+.result_label h3 { font-size: 20px; margin-bottom:20px;}
+
+p {margin: 0px;}
+
+.concert_item { background: white; margin-bottom: 40px;}
+  .introduction { height: 190px; overflow: hidden;}
+      .illustration { padding: 0px ; position: relative; }
+          .overlay_illustration { height:190px; width: 100%; position: absolute; top: 0px;}
+            .overlay_illustration img { height:190px; width: 100%; }
+          .illustration img { }
+      .description {padding: 10px 20px;}
+        h3.artist_name { font-size:40px; color:#e95a4c; text-transform: uppercase;}
+        .description  { position: relative;}
+          .genre {}
+          .date {}
+          .place {}
+          .price {}
+
+          .description .buttons.actions {position: absolute; top: 20px; right: 20px;}
+            .button_jam.action { padding:5px 10px; text-align: center; width: 100px; text-transform: uppercase; font-size: 14px; color: white; margin-bottom: 10px; position: relative; z-index: 3 }
+              .button_jam.action a { color: white; }
+              .button_jam.action.share {}
+              .button_jam.action.book {}
+            .share_content {position: absolute; top: 0px; width: 100px; margin: 10px;}
+
+      .map {padding: 0px; }
+        .map img {}
+  .details { border-top: 1px solid #c2c2c2; }
+    .audios {border-right: 1px solid #c2c2c2; padding: 10px 20px;}
+      .song {}
+          .song .name {}
+          .song .player {}
+                  
+    .biography {border-right: 1px solid #c2c2c2; padding: 10px 20px;}
+      .biography a { color: #e95a4c; text-decoration: underline;}
+      .biography a:hover { color: #ff1700;}
+    
+    .place_informations {padding: 10px 20px;}
+        .address {}
+
+  .expand_button { text-align: center; text-transform: uppercase; color: white; }
+
+
+
+
+
+

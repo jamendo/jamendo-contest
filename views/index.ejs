@@ -3,7 +3,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <html>
   <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="Keywords" content="jamenco, find, concert, search engine, jamendo, api" />
     <meta name="Description" content="Jamenco, find concerts near your place" />
@@ -265,9 +265,9 @@
                       <a class="addthis_button_preferred_3"></a>\
                       <a class="addthis_button_preferred_4"></a>\
                     </div>\
-                  </div>\
-                    <div class="button_jam action book green_stripped"><a href="'+content.buyurl+'"  target="_blank" />Book it</a></div>\
-                </div>\
+                  </div>';
+if(content.buyurl) html+='<div class="button_jam action book green_stripped"><a href="'+content.buyurl+'"  target="_blank" />Book it</a></div>';
+               html+='</div>\
               </div>\
               <div class="small-3 columns map float">\
                 <img src="http://maps.googleapis.com/maps/api/staticmap?center='+content.location_city+', '+content.location_address+'&zoom=13&size=300x300&markers=color:red%7Clabel:O%7C'+content.location_city+', '+content.location_address+'&key=AIzaSyA6KF1e00jijd0fiY_IfN4dciCUwXU8nT4&sensor=false" />\

@@ -40,10 +40,11 @@ gm.config({key: "AIzaSyA6KF1e00jijd0fiY_IfN4dciCUwXU8nT4"});
 
 app.get('/', function(req, res){
   res.render('index', {getData: false, title: "Jamenco"});
+  res.send();
 });
 
 app.get('/city/:id', function(req, res){
-  res.render('index', {getData: req.params.id, title: "Jamenco"});
+  res.set('Content-Type', 'application/xhtml+xml; charset=utf-8');
 });
 
 app.get('/concert/:id', function(req, res){

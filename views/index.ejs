@@ -126,7 +126,17 @@
       function showIndex(data) {
         $('.main').empty();
         $('.main').append('<div class="row content home center"><div class="hp_form_wrapper center"><div class="hp_slogan"><div class="slogan_decoration left"></div><h1> FIND CONCERTS NEAR YOUR PLACE </h1><div class="slogan_decoration right"></div></div><form class="hp_form"><input type="text" id="main_input" class="float" placeholder="TYPE YOUR PLACE HERE..." /><input type="submit" class="float green_stripped" value="FIND!" /></form></div><div class="men"></div> </div></div>');
-
+          var sortArray = new Array();
+          var cityArray = new Array();
+          for (key in data) {
+              sortArray.push({name: key, concerts: data[key]});
+          }
+          sortArray.sort(function(a,b){
+            return b.concerts-a.concerts;
+          });
+          for (var i = 0; i < sortArray.length; i++) {
+            cityArray[i]=sortArray[i].name;
+          };
           
           nb_row = Math.ceil(wheight / 45);
           men_per_row = 45;
@@ -143,7 +153,7 @@
           $('.home.center').css('height',$('.men').height()+40);
 
           $('#main_input').autocomplete({
-            source: data
+            source: cityArray
           });
       }
 
@@ -256,7 +266,7 @@
                 <h3 class="artist_name">'+content.artist_name+'</h3>\
                 <p class="description_item genre">Electronic </p>\
                 <p class="description_item date">'+content.date+'</p>\
-                <p class="description_item place">'+content.location_name+'</p>\
+                <p class="description_item place">'+decodeURIComponent(escape(content.location_name))+'</p>\
                 <p class="description_item price">'+content.price+'</p>\
                 <div class="buttons actions">\
                    <div class="button_jam action share green_stripped not_expanded">Spread it</div>\

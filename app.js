@@ -47,6 +47,13 @@ app.get('/city/:id', function(req, res){
   res.render('index', {getData: req.params.id, title: "Jamenco"});
 });
 
+app.get('/test', function(req, res){
+  
+  jamendo.concerts({ limit: 100, datebetween: [ new Date(), '2013-10-10' ], location_city: 'paris', order: 'date_desc'}, function(error, concerts){
+      res.render('test', {concerts: concerts.results});
+  });
+});
+
 app.get('/concert/:id', function(req, res){
   res.render('index', {getData: req.params.id, title: "Jamenco"});
 });
@@ -72,21 +79,11 @@ app.get('/getConcerts/:id', function(req, res){
 
 app.get('/getCities/', function(req, res){
   jamendo.concerts({ limit: 100, datebetween: [ new Date(), '2013-10-10' ], order: 'date_desc'}, function(error, concerts){
-      var cities = new Array();
-      var k = 0;
-      var exists = false
+      var cities = new Object();
       for (var i = 0; i < concerts.results.length; i++) {
-        exists = false;
-        for (var j = 0; j < cities.length; j++) {
-          if(cities[j] == $.trim(concerts.results[i].location_city.toLowerCase())) {
-            exists = true;
-            break;
-          }
-        };       
-        if(!exists) {
-          cities[k] = $.trim(concerts.results[i].location_city.toLowerCase());
-          k++;
-        }
+        var cityname=$.trim(concerts.results[i].location_city.toLowerCase());
+        if(cities[cityname]) cities[cityname]++;
+        else cities[cityname]=1;
       };
       res.json(cities);
   });

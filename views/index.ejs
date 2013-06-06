@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/css/player.css" />
     <link rel="stylesheet" href="/css/auto.css" />
     <script src="/js/vendor/custom.modernizr.js"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f600503653651b3"></script>
     
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -171,6 +172,7 @@
         $('.main').append(html);
         for (var i = 0; i < concerts.length; i++) {
           $('.main').append(makeListing(concerts[i]));
+          addthis.toolbox(".addthis_toolbox");
         };    
         $('.concert_item').each(function(){
           $(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
@@ -241,7 +243,7 @@
       }
 
       function makeListing(content) {
-        var html = '<div class="row content result_listing "> \
+        var html = '<div id="'+content.id+'" class="row content result_listing "> \
         <div class="row concert_row">\
           <div class="small-1 columns height"></div>\
           <div class="small-10 columns concert_item not_expanded">\
@@ -259,7 +261,7 @@
                 <div class="buttons actions">\
                    <div class="button_jam action share green_stripped not_expanded">Spread it</div>\
                   <div class="share_content">\
-                     <div class="addthis_toolbox addthis_default_style ">\
+                     <div class="addthis_toolbox addthis_default_style" addthis:url="http://jamen.co/concert/'+content.id+'" addthis:title="'+content.artist_name+' will play in '+content.location_city.toUpperCase()+'!" addthis:description="'+content.description+'">\
                       <a class="addthis_button_preferred_1"></a>\
                       <a class="addthis_button_preferred_2"></a>\
                       <a class="addthis_button_preferred_3"></a>\
@@ -300,7 +302,5 @@ if(content.buyurl) html+='<div class="button_jam action book green_stripped"><a 
       }
 
     </script>
-    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f600503653651b3"></script>
   </body>
 </html>

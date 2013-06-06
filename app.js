@@ -44,7 +44,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/city/:id', function(req, res){
-  res.set('Content-Type', 'application/xhtml+xml; charset=utf-8');
+  res.render('index', {getData: req.params.id, title: "Jamenco"});
 });
 
 app.get('/concert/:id', function(req, res){

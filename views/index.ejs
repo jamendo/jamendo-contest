@@ -182,8 +182,12 @@
         } else {
           html+='Sorry, I did not find any concerts for '+search+'.';
         }
-        html+='</h3></div></div>'
-        $('.main').append(html);
+        html+='</h3></div></div>';
+        if (parseInt(id) == id) {
+          html="";
+        } else {
+          $('.main').append(html);
+        }
         for (var i = 0; i < concerts.length; i++) {
           $('.main').append(makeListing(concerts[i]));
           addthis.toolbox(".addthis_toolbox");

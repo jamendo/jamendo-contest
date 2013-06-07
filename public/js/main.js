@@ -28,6 +28,23 @@ $(document).ready(function(){
 		if($(this).parent().parent().find('.loader').hasClass('loader')) {
 			getTracks($(this).parent().parent().find('.audios').attr('id'));
 		}
+<<<<<<< HEAD
+
+		max_column = Math.max($(this).parent().parent().find('.audios ul').height(),$(this).parent().parent().find('.biography').height(),$(this).parent().parent().find('.place_informations').height());
+  		//$(this).parent().parent().parent().find('.audios, .biography, .place_informations, .row.details').css('height',max_column + 50);
+  		//console.log($(this).parent().parent().find('.audios').attr('id'));
+  		// console.log(max_column);
+  		// console.log(max_column);
+  		// console.log(max_column);
+  		// $('$(this)')
+  		id_audio = $(this).parent().parent().find('.audios').attr('id');
+  		max_column = $('#'+id_audio).height();
+	  	$(this).parent().parent().parent().find('.audios, .biography, .place_informations, .row.details').css('height',max_column + 50);
+
+
+
+=======
+>>>>>>> 80145661582aac2a223a70d1ad63e1a5e718fe8e
 		$(this).parent().parent().parent().find('.row.details').slideDown(300);
 		$(this).parent().parent().addClass('expanded').removeClass('not_expanded');
 		$(this).text('less information');

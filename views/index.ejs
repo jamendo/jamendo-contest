@@ -174,7 +174,7 @@
 
       function showConcerts(concerts, search) {
         $('.main').empty();
-        $('#top_input').val(search);
+        var id = search;
         search = '<span style="text-transform:uppercase">'+search+'</span>';
         var html = '<div class="row"><div class="small-12 columns result_label"><h3>';
         if(concerts.length>0) {
@@ -183,11 +183,14 @@
           html+='Sorry, I did not find any concerts for '+search+'.';
         }
         html+='</h3></div></div>';
+
         if (parseInt(id) == id) {
           html="";
         } else {
           $('.main').append(html);
+          $('#top_input').val(id);
         }
+
         for (var i = 0; i < concerts.length; i++) {
           $('.main').append(makeListing(concerts[i]));
           addthis.toolbox(".addthis_toolbox");

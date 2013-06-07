@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <link rel='stylesheet' href='/stylesheets/player.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap-responsive.css' />
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/audio.min.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to concerts</p>
+    <div class='main'>
+    <% for (var i = 0; i < concerts.length; i++) { %>
+      <p class="expand" id="<%= concerts[i].artist_id %>"><%= concerts[i].artist_name %> <%= concerts[i].id %></p>
+      <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= concerts[i].location_city %>, <%= concerts[i].location_address %>&zoom=13&size=300x300&markers=color:blue%7Clabel:S%7C<%= concerts[i].location_city %>, <%= concerts[i].location_address %>&key=AIzaSyA6KF1e00jijd0fiY_IfN4dciCUwXU8nT4&sensor=false">
+  	<% }; %>
+    </div>
+    <script type="text/javascript">
+
+      $(document).on('click', '.expand', function(){
+          $('.main').empty();
+          $('.main').append("<h1>loading...</h1>");
+          console.log($(this).attr('id'));
+          //socket.emit('getTracks', $(this).attr('id'));
+          $.ajax({
+            url: "/getTracks/"+$(this).attr('id'),
+            type: "GET",
+            data: 'json',
+          }).success(function ( tracks ) {
+            $('.main').empty();
+            for (var i = 0; i < tracks.length; i++) {
+              $('.main').append('<audio src="'+tracks[i].audio+'" preload="none" />');
+            };
+            audiojs.events.ready(function() {
+              var as = audiojs.createAll({css: false});
+            });
+          });
+      });
+    </script>
+  </body>
+</html>

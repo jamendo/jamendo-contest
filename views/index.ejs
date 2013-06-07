@@ -207,15 +207,17 @@
               $('.audios.'+id).eq(i).append('<ul></ul>');
               for (var j = 0; j < tracks.length; j++) {
                 var song = '<li class="song">'
-                song+='<div class="name">'+tracks[j].name+' - '+tracks[j].album_name+' - '+tracks[j].releasedate.split('-')[0]+'</div>';
-                song+='<div class="player"><audio id="'+tracks[j].id+'" src="'+tracks[j].audio+'" preload="none" /></div>';
+                song+='<div class="player float"><audio id="'+tracks[j].id+'" src="'+tracks[j].audio+'" preload="none" /></div>';
+                song+='<div class="name float">'+tracks[j].name+'</div>';
+                song+='<div class="clear"></div>';
                 song+='</li>';
                 $('.audios.'+id+' ul').eq(i).append(song);
                 audiojs.create($('.audios.'+id).eq(i).find('#'+tracks[j].id), {css: false});
               };
             };
             $('.concert_item').each(function(){
-              $(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
+              max_column = Math.max($(this).find('.audios ul').height(),$(this).find('.biography').height(),$(this).find('.place_informations').height());
+              $(this).find('.audios, .biography, .place_informations, .row.details').css('height',max_column + 50);
             });
           });
       }

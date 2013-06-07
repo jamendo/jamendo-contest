@@ -6,8 +6,15 @@
  overflow: hidden;
  }
 .audiojs .play-pause { padding: 4px 6px;
+<<<<<<< HEAD
  float: left;
  overflow: hidden;
+=======
+ margin: 0px;
+ float: left;
+ overflow: hidden;
+ background-color: green;
+>>>>>>> 80145661582aac2a223a70d1ad63e1a5e718fe8e
   }
 .audiojs p { display: none;
  width: 25px;

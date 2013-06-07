@@ -203,7 +203,10 @@
           $(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
           $('.row.details').slideUp(0);
         });
-        $(document).trigger('initialization');    
+        $(document).trigger('initialization');   
+        if (parseInt(id) == id) {
+          $('.concert_item.not_expanded .expand_button, .concert_item .expand_button').trigger('click');   
+        }
       }
 
       function getTracks(id) {
@@ -270,6 +273,7 @@
       }
 
       function makeListing(content) {
+        if(!content.artist_image) content.artist_image = "https://raw.github.com/coldping/jamendo-contest/greg/public/img/foo_artist.jpg"; 
         var html = '<div id="'+content.id+'" class="row content result_listing "> \
         <div class="row concert_row">\
           <div class="small-1 columns height"></div>\

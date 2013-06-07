@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+	var concert_row = $('.concert_row')
+	//simulate several concerts
+	for(i=0;i<10;i++)
+	{
+		concert_row.clone().appendTo($('.result_listing'));
+	}
+
 	// when hover the spread button, make a share button appearing
 	$(document).on('click','.button_jam.action.share.not_expanded', function(){
 		$(this).css('left',-100);
@@ -12,10 +19,37 @@ $(document).ready(function(){
 	});
 		
 
+	// header animation form logo center to logo left + search bar right
+	setTimeout(function(){
+		$(document).trigger('initialization');
+	},3000)
+
 	$(document).on('initialization',function(){
-		$('.header_content').css('width','100%');
+		$('.header_content').css('width',960);
 		$('.header_content .header_form').fadeOut(0).fadeIn(300);
 	});
+
+	// hp calculate nb of ppl according to the size of the screen
+	wheight = $(window).height();
+	nb_row = Math.ceil(wheight / 45);
+	men_per_row = 45;
+	total_men = nb_row * men_per_row;
+	for(i=0;i<total_men;i++)
+	{
+		$('.men').append('<div class="man"></div>')
+	}
+
+	// hp top form
+	top_hp_form = ((nb_row - 7)/2)*33;
+	console.log((nb_row - 7)/2);
+	console.log(top_hp_form);
+	$('.hp_form_wrapper').css('top',top_hp_form);
+
+	// loading top 
+	top_loading = wheight/2 - 200;
+	$('.content.loading').css('top',top_loading); 
+
+	$('.home.center').css('height',$('.men').height()+40);
 
 	// calculating height column
 	$('.concert_item').each(function(){
@@ -25,23 +59,6 @@ $(document).ready(function(){
 
 	// expand the boxs results
 	$(document).on('click','.concert_item.not_expanded .expand_button, .concert_item .expand_button',function(){
-		if($(this).parent().parent().find('.loader').hasClass('loader')) {
-			getTracks($(this).parent().parent().find('.audios').attr('id'));
-		}
-
-		max_column = Math.max($(this).parent().parent().find('.audios ul').height(),$(this).parent().parent().find('.biography').height(),$(this).parent().parent().find('.place_informations').height());
-  		//$(this).parent().parent().parent().find('.audios, .biography, .place_informations, .row.details').css('height',max_column + 50);
-  		//console.log($(this).parent().parent().find('.audios').attr('id'));
-  		// console.log(max_column);
-  		// console.log(max_column);
-  		// console.log(max_column);
-  		// $('$(this)')
-  		id_audio = $(this).parent().parent().find('.audios').attr('id');
-  		max_column = $('#'+id_audio).height();
-	  	$(this).parent().parent().parent().find('.audios, .biography, .place_informations, .row.details').css('height',max_column + 50);
-
-
-
 		$(this).parent().parent().parent().find('.row.details').slideDown(300);
 		$(this).parent().parent().addClass('expanded').removeClass('not_expanded');
 		$(this).text('less information');
@@ -54,7 +71,7 @@ $(document).ready(function(){
 	});
 
 	// hp man hover effect, randomly choose a position
-	$(document).on('mouseenter', '.man', function(){
+	$('.man').hover(function(){
 		random = Math.floor((Math.random()*10)+1);
 		if(random == 1 && random == 10 )
 		{

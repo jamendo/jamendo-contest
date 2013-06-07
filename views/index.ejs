@@ -27,6 +27,8 @@
   <div id="page">
     <nav class="top-bar contain-to-grid">
 
+      <div class="row">
+      <div class="small-12 columns">
         <div class="header_content center">
           <div class="logo float"><a href="/"><img src="/img/logo_header.png" /></a></div> 
           <form class="header_form float">
@@ -35,6 +37,8 @@
           </form>
           <div class="clear"></div> 
 
+      </div> 
+      </div> 
       </div> 
       
       <div class="glossy_header"></div> 
@@ -125,7 +129,7 @@
 
       function showIndex(data) {
         $('.main').empty();
-        $('.main').append('<div class="row content home center"><div class="hp_form_wrapper center"><div class="hp_slogan"><div class="slogan_decoration left"></div><h1> FIND CONCERTS NEAR YOUR PLACE </h1><div class="slogan_decoration right"></div></div><form class="hp_form"><input type="text" id="main_input" class="float" placeholder="TYPE YOUR PLACE HERE..." /><input type="submit" class="float green_stripped" value="FIND!" /></form></div><div class="men"></div> </div></div>');
+        $('.main').append('<div class="row content home center"><div class="hp_form_wrapper center"><div class="hp_slogan"><div class="slogan_decoration left"></div><h1> FIND CONCERTS NEAR YOUR PLACE </h1><div class="slogan_decoration right"></div></div><form class="hp_form"><input type="text" class="float" placeholder="TYPE YOUR PLACE HERE..." /><input type="submit" class="float green_stripped" value="FIND!" /></form><div class="suggestions clear"><div class="title">Hot Places :</div><a class="suggestion" href="paris">Paris</a><a class="suggestion" href="roma">Roma</a><a class="suggestion" href="toulouse">Toulouse</a><a class="suggestion" href="london">London</a><a class="suggestion" href="lyon">Lyon</a></div></div><div class="men"></div> </div></div>');
           var sortArray = new Array();
           var cityArray = new Array();
           for (key in data) {

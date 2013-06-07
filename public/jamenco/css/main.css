@@ -29,18 +29,17 @@
 .constr { border:dotted 1px black;}
 .left { float: left;}
 .inline {display:inline-block;}
-.center { margin:0 auto; }
+.center { margin:0 auto; width:960px;}
 .height {height: 1px;}
 
 
-a { color:#e95a4c; }
-a:hover { color:red;}
+a { color:303030; }
+a.active {}
 
 /* CSS3 Animation */
 .red_stripped,
 .green_stripped,
 .header_content,
-a,
 .biography a {transition: all 0.6s; -webkit-transition: all 0.6s; -moz-transition: all 0.6s; -o-transition: all 0.6s; -ms-transition: all 0.6s;}
 
 .red_stripped {background: url('../img/red_stripped.jpg'); text-shadow:0px 0px 3px rgba(0,0,0,0.5);}
@@ -62,12 +61,12 @@ body { background: #e7e5ce; font-family: 'akzidenz_cond', arial; color:#303030; 
     .top-bar {position: relative;}
     .header_content {width:135px; position: relative; z-index:3;}
 
-      .logo { text-align: center; position: relative; z-index: 2; }
-      .top-bar .glossy_header { height:50px; display: block; position:absolute; top:50px; background:#212121; width: 100%;  }
-      .top-bar .red_bar { height:3px; display: block; position:absolute; top: 100px; background:#e95a4c; width:100%;  }
+      .logo { text-align: center; position: relative; z-index: 2;}
+      .top-bar .glossy_header { height:50px; display: block; position:absolute; top:50px; background:#212121; width: 100%; min-width: 960px; }
+      .top-bar .red_bar { height:3px; display: block; position:absolute; top: 100px; background:#e95a4c; width:100%; min-width: 960px; }
 
-      .header_form {display: none; position: absolute; right:0px; margin-top:23px; }
-      .header_form input[type="text"] {padding-top: 0px;height: 38px;border: 2px solid #e95a4c;width: 220px;font-size: 20px; text-transform: uppercase; }
+      .header_form {display: none; position: absolute; right:0px; margin-top:23px;}
+      .header_form input[type="text"] {padding-top: 0px;height: 38px;border: 2px solid #e95a4c;width: 220px;font-size: 20px; }
       .header_form input[type="submit"] {padding-top: 1px;height: 38px;width: 70px;font-size: 20px;text-transform: uppercase;font-size: 20px;color: white;border: none; }
       .header_form input[type="submit"]:hover {}
 
@@ -80,12 +79,8 @@ body { background: #e7e5ce; font-family: 'akzidenz_cond', arial; color:#303030; 
               .slogan_decoration.left {background-position: 0px 0px; left: 30px; }
               .slogan_decoration.right {background-position: -25px 0px; right: 30px;}
           .hp_form { margin-top: 35px;}
-            .hp_form input[type="text"] { text-transform: uppercase; padding-top: 15px;  height: 70px; border: 4px solid #e95a4c; width: 400px; font-size: 23px; margin: 0px}
+            .hp_form input[type="text"] {padding-top: 15px;  height: 70px; border: 4px solid #e95a4c; width: 400px; font-size: 23px;}
             .hp_form input[type="submit"] {padding-top: 5px; height: 70px; width:100px; font-size:20px; text-transform:uppercase; font-size: 25px; color: white;  border: none; }
-            .suggestions {}
-              .suggestions .title { display: inline-block; padding-right: 7px;}
-              .suggestion {padding:0px 5px;}
-
         .men { position: absolute; top: 0px;}      
           .man {display: block; width:13px; height:31px; margin:1px 4px; float: left; background:url('../img/sprite_dancer.png') 0px 0px;}
 
@@ -125,16 +120,11 @@ body { background: #e7e5ce; font-family: 'akzidenz_cond', arial; color:#303030; 
 
    .loading.content { text-align: center;}
       .loader {position: relative; width:197px; height:197px; }
-        .loader .loader_spin.spin_1 { background:url('../img/loader.png') 190px 0px; width:185px; height:185px; display:block; position: absolute; top: 0px; z-index: 2;}
-        .loader .loader_spin.spin_2 { background:url('../img/loader.png') 377px 0px; width:185px; height:185px; display:block; position: absolute; top: 0px; z-index: 3;}
-        .loader .loader_logo { background:url('../img/loader.png'); width:185px; height:185px; display: block; position: absolute; top: 0px; z-index: 1;}
+        .loader .loader_spin.spin_1 { background:url('../img/loader3exp.png') 190px 0px; width:185px; height:185px; display:block; position: absolute; top: 0px; z-index: 2;}
+        .loader .loader_spin.spin_2 { background:url('../img/loader3exp.png') 377px 0px; width:185px; height:185px; display:block; position: absolute; top: 0px; z-index: 3;}
+        .loader .loader_logo { background:url('../img/loader3exp.png'); width:185px; height:185px; display: block; position: absolute; top: 0px; z-index: 1;}
       
       .loading.content h3 { margin-top: 20px;}
-
-  .loader.small {position: relative; width:60px; height:60px; }
-    .loader.small .loader_spin.spin_1 {background:url('../img/loader_small.png') 122px 0px; width:60px; height:60px;}
-      .loader.small .loader_spin.spin_2 {background:url('../img/loader_small.png') 61px 0px; width:60px; height:60px;}
-      .loader.small .loader_logo {background:url('../img/loader_small.png'); width:60px; height:60px;}
 
 /* =============================================================================
    LIST PAGE
@@ -148,9 +138,9 @@ p {margin: 0px;}
       .illustration { padding: 0px ; position: relative; }
           .overlay_illustration { height:190px; width: 100%; position: absolute; top: 0px;}
             .overlay_illustration img { height:190px; width: 100%; }
-          .illustration img {width: 215px; }
-      .description {padding: 10px 130px 10px 20px;}
-        h3.artist_name { font-size:40px; line-height: 41px; margin-top: 6px; color:#e95a4c; text-transform: uppercase;}
+          .illustration img { }
+      .description {padding: 10px 20px;}
+        h3.artist_name { font-size:40px; color:#e95a4c; text-transform: uppercase;}
         .description  { position: relative;}
           .genre {}
           .date {}
@@ -166,20 +156,11 @@ p {margin: 0px;}
 
       .map {padding: 0px; }
         .map img {}
-
-  .details { border-top: 1px solid #c2c2c2; overflow: hidden; }
-    .audios {border-right: 1px solid #c2c2c2; padding: 10px 20px; }
-
-      .audiojs.loading .play-pause {background:url('../img/player-buttons.png') -40px 0px; }
-      .audiojs.playing .play-pause {background:url('../img/player-buttons.png') -20px 0px;}
-      .audiojs .play-pause {background:url('../img/player-buttons.png'); width: 19px; height: 19px; margin-top: 4px;}
-
-      .audios ul {margin: 0px; list-style: none;}
-        .scrubber {display: none;}
-        .song { margin-bottom: 10px;}
-            .song .name { display: block; width: 133px; }
-            .song .player {display: block; width: 40px;}
-    .loader {margin: 0 auto; padding-top: 50px; display: block; }
+  .details { border-top: 1px solid #c2c2c2; }
+    .audios {border-right: 1px solid #c2c2c2; padding: 10px 20px;}
+      .song {}
+          .song .name {}
+          .song .player {}
                   
     .biography {border-right: 1px solid #c2c2c2; padding: 10px 20px;}
       .biography a { color: #e95a4c; text-decoration: underline;}

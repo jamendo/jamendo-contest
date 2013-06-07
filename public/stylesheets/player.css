@@ -4,10 +4,12 @@
 .audiojs { width: 460px;
  height: 36px;
  overflow: hidden;
- }
+  }
 .audiojs .play-pause { padding: 4px 6px;
+ margin: 0px;
  float: left;
  overflow: hidden;
+ background-color: green;
   }
 .audiojs p { display: none;
  width: 25px;

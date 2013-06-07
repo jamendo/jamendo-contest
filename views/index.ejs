@@ -12,42 +12,21 @@
     <link rel="stylesheet" href="/css/foundation.css" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/player.css" />
-<<<<<<< HEAD
-    <script src="/js/vendor/custom.modernizr.js"></script>
-=======
     <link rel="stylesheet" href="/css/auto.css" />
     <script src="/js/vendor/custom.modernizr.js"></script>
-
->>>>>>> 80145661582aac2a223a70d1ad63e1a5e718fe8e
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f600503653651b3"></script>
+    
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- History.js -->
     <script src="//browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js"></script>
     <script src="/js/audio.min.js"></script>
-<<<<<<< HEAD
-=======
     <script src="/js/jquery-ui-1.10.3.custom.min.js"></script>
->>>>>>> 80145661582aac2a223a70d1ad63e1a5e718fe8e
   </head>
   <body>
   <div id="page">
     <nav class="top-bar contain-to-grid">
 
-<<<<<<< HEAD
-        <div class="row">
-        <div class="small-12 columns">
-          <div class="header_content center">
-            <div class="logo float"><a href="/"><img src="/img/logo_header.png" /></a></div> 
-            <form class="header_form float">
-              <input id="top_input" type="text" class="float" placeholder="TYPE YOUR PLACE HERE..." value="" />
-              <input type="submit" class="float green_stripped" value="FIND!" />
-            </form>
-            <div class="clear"></div> 
-
-            </div> 
-          </div> 
-        </div> 
-=======
         <div class="header_content center">
           <div class="logo float"><a href="/"><img src="/img/logo_header.png" /></a></div> 
           <form class="header_form float">
@@ -57,7 +36,6 @@
           <div class="clear"></div> 
 
       </div> 
->>>>>>> 80145661582aac2a223a70d1ad63e1a5e718fe8e
       
       <div class="glossy_header"></div> 
       <div class="red_bar"></div> 
@@ -79,13 +57,7 @@
     <div class="red_bar"></div> 
     <div class="text center">JAMENCO.COM&nbsp;&nbsp;//&nbsp;&nbsp;All RIGHTS RESERVED&nbsp;&nbsp;//&nbsp;&nbsp;A PROJECT BASED ON JAMENDO API&nbsp;&nbsp;//&nbsp;&nbsp;CODED BY <a href="http://www.michalkowalkowski.com/" target="_blank">MICHAL KOWALKOWSKI</a> & DESIGN BY <a href="http://www.creativegreg.com/" target="_blank"> CREATIVEGREG </a> </div>
   </div>
-<<<<<<< HEAD
-  
 
-  <script src="/js/vendor/jquery.js"></script>
-=======
-
->>>>>>> 80145661582aac2a223a70d1ad63e1a5e718fe8e
   <script src="/js/foundation.min.js"></script>
   <script src="/js/main.js"></script>
 
@@ -151,30 +123,23 @@
           getConcerts($(this).find('input').val());
       });
 
-<<<<<<< HEAD
-      $(document).on('click', '.suggestion', function(e) {
-          e.preventDefault();
-          $('.main').empty();
-          showLoading();
-          getConcerts($(this).attr('href'));
-      });
-
-      function showIndex(data) {
-        $('.main').empty();
-        $('.main').append('<div class="row content home center"><div class="hp_form_wrapper center"><div class="hp_slogan"><div class="slogan_decoration left"></div><h1> FIND CONCERTS NEAR YOUR PLACE </h1><div class="slogan_decoration right"></div></div><form class="hp_form"><input type="text" class="float" placeholder="TYPE YOUR PLACE HERE..." /><input type="submit" class="float green_stripped" value="FIND!" /></form><div class="suggestions clear"><div class="title">Hot Places :</div><a class="suggestion" href="paris">Paris</a><a class="suggestion" href="roma">Roma</a><a class="suggestion" href="toulouse">Toulouse</a><a class="suggestion" href="london">London</a><a class="suggestion" href="lyon">Lyon</a></div></div><div class="men"></div> </div></div>');
-
-          
-          nb_row = Math.ceil(wheight / 45);
-          men_per_row = 47;
-=======
       function showIndex(data) {
         $('.main').empty();
         $('.main').append('<div class="row content home center"><div class="hp_form_wrapper center"><div class="hp_slogan"><div class="slogan_decoration left"></div><h1> FIND CONCERTS NEAR YOUR PLACE </h1><div class="slogan_decoration right"></div></div><form class="hp_form"><input type="text" id="main_input" class="float" placeholder="TYPE YOUR PLACE HERE..." /><input type="submit" class="float green_stripped" value="FIND!" /></form></div><div class="men"></div> </div></div>');
-
+          var sortArray = new Array();
+          var cityArray = new Array();
+          for (key in data) {
+              sortArray.push({name: key, concerts: data[key]});
+          }
+          sortArray.sort(function(a,b){
+            return b.concerts-a.concerts;
+          });
+          for (var i = 0; i < sortArray.length; i++) {
+            cityArray[i]=sortArray[i].name;
+          };
           
           nb_row = Math.ceil(wheight / 45);
-          men_per_row = 45;
->>>>>>> 80145661582aac2a223a70d1ad63e1a5e718fe8e
+          men_per_row = 47;
           total_men = nb_row * men_per_row;
           for(i=0;i<total_men;i++)
           {
@@ -186,13 +151,10 @@
           console.log(top_hp_form);
           $('.hp_form_wrapper').css('top',top_hp_form);
           $('.home.center').css('height',$('.men').height()+40);
-<<<<<<< HEAD
-=======
 
           $('#main_input').autocomplete({
-            source: data
+            source: cityArray
           });
->>>>>>> 80145661582aac2a223a70d1ad63e1a5e718fe8e
       }
 
       function showLoading() {
@@ -220,6 +182,7 @@
         $('.main').append(html);
         for (var i = 0; i < concerts.length; i++) {
           $('.main').append(makeListing(concerts[i]));
+          addthis.toolbox(".addthis_toolbox");
         };    
         $('.concert_item').each(function(){
           $(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
@@ -239,29 +202,16 @@
               $('.audios.'+id).eq(i).empty();
               $('.audios.'+id).eq(i).append('<ul></ul>');
               for (var j = 0; j < tracks.length; j++) {
-<<<<<<< HEAD
-                var song = '<li class="song ">'
-                song+='<div class="player float"><audio id="'+tracks[j].id+'" src="'+tracks[j].audio+'" preload="none" /></div>';
-                song+='<div class="name float">'+tracks[j].name+'</div>';
-                song+='<div class="clear"></div>';
-=======
                 var song = '<li class="song">'
                 song+='<div class="name">'+tracks[j].name+' - '+tracks[j].album_name+' - '+tracks[j].releasedate.split('-')[0]+'</div>';
                 song+='<div class="player"><audio id="'+tracks[j].id+'" src="'+tracks[j].audio+'" preload="none" /></div>';
->>>>>>> 80145661582aac2a223a70d1ad63e1a5e718fe8e
                 song+='</li>';
                 $('.audios.'+id+' ul').eq(i).append(song);
                 audiojs.create($('.audios.'+id).eq(i).find('#'+tracks[j].id), {css: false});
               };
             };
-<<<<<<< HEAD
-            $('.concert_item').each(function(){ 
-              max_column = Math.max($(this).find('.audios ul').height(),$(this).find('.biography').height(),$(this).find('.place_informations').height());
-              $(this).find('.audios, .biography, .place_informations, .row.details').css('height',max_column + 50);
-=======
             $('.concert_item').each(function(){
               $(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
->>>>>>> 80145661582aac2a223a70d1ad63e1a5e718fe8e
             });
           });
       }
@@ -279,10 +229,10 @@
           }).success(function ( concerts ) {
             if(city) {
               var link = "/city/"+id;
-              var title = "Jamenco - "+id;
+              var title = "Jamenco - "+id.toUpperCase();
             } else {
               var link = "/concert/"+id;
-              var title = "Jamenco - "+concerts[0].artist_name;              
+              var title = "Jamenco - "+concerts[0].artist_name.toUpperCase();              
             }
             console.log(concerts);
             History.pushState({concerts: concerts, page: "concerts", search: id}, title, link);
@@ -303,7 +253,7 @@
       }
 
       function makeListing(content) {
-        var html = '<div class="row content result_listing "> \
+        var html = '<div id="'+content.id+'" class="row content result_listing "> \
         <div class="row concert_row">\
           <div class="small-1 columns height"></div>\
           <div class="small-10 columns concert_item not_expanded">\
@@ -316,12 +266,12 @@
                 <h3 class="artist_name">'+content.artist_name+'</h3>\
                 <p class="description_item genre">Electronic </p>\
                 <p class="description_item date">'+content.date+'</p>\
-                <p class="description_item place">'+content.location_name+'</p>\
+                <p class="description_item place">'+decodeURIComponent(escape(content.location_name))+'</p>\
                 <p class="description_item price">'+content.price+'</p>\
                 <div class="buttons actions">\
                    <div class="button_jam action share green_stripped not_expanded">Spread it</div>\
                   <div class="share_content">\
-                     <div class="addthis_toolbox addthis_default_style ">\
+                     <div class="addthis_toolbox addthis_default_style" addthis:url="http://jamen.co/concert/'+content.id+'" addthis:title="'+content.artist_name+' will play in '+content.location_city.toUpperCase()+'!" addthis:description="'+content.description+'">\
                       <a class="addthis_button_preferred_1"></a>\
                       <a class="addthis_button_preferred_2"></a>\
                       <a class="addthis_button_preferred_3"></a>\
@@ -332,16 +282,12 @@ if(content.buyurl) html+='<div class="button_jam action book green_stripped"><a 
                html+='</div>\
               </div>\
               <div class="small-3 columns map float">\
-                <img src="http://maps.googleapis.com/maps/api/staticmap?center='+content.location_city+', '+content.location_address+'&zoom=13&size=300x300&markers=color:red%7Clabel:O%7C'+content.location_city+', '+content.location_address+'&key=AIzaSyA6KF1e00jijd0fiY_IfN4dciCUwXU8nT4&sensor=false" />\
+                <img src="http://maps.googleapis.com/maps/api/staticmap?center='+content.location_city+', '+content.location_address+'&zoom=13&size=300x300&markers=icon:http://raw.github.com/coldping/jamendo-contest/michal/public/img/jamenco-map-icon.png%7C'+content.location_city+', '+content.location_address+'&key=AIzaSyA6KF1e00jijd0fiY_IfN4dciCUwXU8nT4&sensor=false" />\
               </div>\
             </div>\
             <div class="row details">\
               <div id="'+content.artist_id+'" class="audios '+content.artist_id+' small-3 columns float">\
-<<<<<<< HEAD
-                <div class="loader small">\
-=======
                 <div class="loader">\
->>>>>>> 80145661582aac2a223a70d1ad63e1a5e718fe8e
                   <div class="loader_spin spin_1"></div>\
                   <div class="loader_spin spin_2"></div>\
                   <div class="loader_logo"></div>\
@@ -354,6 +300,7 @@ if(content.buyurl) html+='<div class="button_jam action book green_stripped"><a 
               <div class="place_informations small-3 columns float">\
                 <p class="address">'+content.location_address+'</p> \
                 <p>'+content.location_city+'</p>\
+                <p><a href="http://maps.google.com/maps?q='+content.location_city+', '+content.location_address+'">Show on map</a></p>\
               </div>\
             </div>\
             <div class="row">\
@@ -366,7 +313,5 @@ if(content.buyurl) html+='<div class="button_jam action book green_stripped"><a 
       }
 
     </script>
-    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f600503653651b3"></script>
   </body>
 </html>

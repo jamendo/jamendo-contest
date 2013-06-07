@@ -7,6 +7,9 @@
     <title>test</title>
 </head>
 <body>
+<% for (var i = 0; i < concerts.length; i++) { %>
+	<%= decodeURIComponent(escape(concerts[i].location_name)) %>
+<% }; %>
 </body>
 <script type="text/javascript">document.write(decodeURIComponent(escape('P\u00c3\u00a8re-Lachaise')));</script>
 </html>

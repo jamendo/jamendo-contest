@@ -150,7 +150,6 @@
           {
             $('.men').append('<div class="man"></div>')
           }
-
           // $(window).resize(function(){
           //   $('.men').empty();
           //   // nb_row = Math.ceil(wheight / 45);
@@ -162,7 +161,7 @@
           //   // }
           // });
 
-          top_hp_form = ((nb_row - 7)/2)*33;
+          top_hp_form = ((Math.ceil((nb_row - 7)/2))-1)*33;
           console.log((nb_row - 7)/2);
           console.log(top_hp_form);
           $('.hp_form_wrapper').css('top',top_hp_form);

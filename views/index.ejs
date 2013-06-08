@@ -159,6 +159,8 @@
           $('#main_input').autocomplete({
             source: cityArray
           });
+
+          $('#page').addClass('home').removeClass('list loading');
       }
 
       function showLoading() {
@@ -169,6 +171,8 @@
           $('.content.loading').css('top',top_loading); 
 
           $('.home.center').css('height',$('.men').height()+40);
+
+          $('#page').addClass('loading').removeClass('home list');
       }
 
 
@@ -192,7 +196,7 @@
           $('.main').append(makeListing(concerts[i]));
           addthis.toolbox(".addthis_toolbox");
         };    
-        
+        $('#page').addClass('list').removeClass('home loading');
         $(document).trigger('initialization');    
       }
 
@@ -305,7 +309,7 @@
               <h4>Place</h4>\
               <p class="address">'+content.location_address+'</p> \
               <p>'+content.location_city+'</p>\
-              <p><a href="http://maps.google.com/maps?q='+content.location_city+', '+content.location_address+'">Show on map</a></p>\
+              <p><a href="http://maps.google.com/maps?q='+content.location_city+', '+content.location_address+'" target="_blank">Show on map</a></p>\
             </div>\
           </div>\
           <div class="row">\

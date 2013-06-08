@@ -15,40 +15,22 @@ $(document).ready(function(){
 	$(document).on('initialization',function(){
 		$('.header_content').css('width','100%');
 		$('.header_content .header_form').fadeOut(0).fadeIn(300);
-	});
-
-	// calculating height column
-	$('.concert_item').each(function(){
-		$(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
 		$('.row.details').slideUp(0);
 	});
+
 
 	// expand the boxs results
 	$(document).on('click','.concert_item.not_expanded .expand_button, .concert_item .expand_button',function(){
 		if($(this).parent().parent().find('.loader').hasClass('loader')) {
 			getTracks($(this).parent().parent().find('.audios').attr('id'));
 		}
-
-		max_column = Math.max($(this).parent().parent().find('.audios ul').height(),$(this).parent().parent().find('.biography').height(),$(this).parent().parent().find('.place_informations').height());
-  		//$(this).parent().parent().parent().find('.audios, .biography, .place_informations, .row.details').css('height',max_column + 50);
-  		//console.log($(this).parent().parent().find('.audios').attr('id'));
-  		// console.log(max_column);
-  		// console.log(max_column);
-  		// console.log(max_column);
-  		// $('$(this)')
-  		id_audio = $(this).parent().parent().find('.audios').attr('id');
-  		max_column = $('#'+id_audio).height();
-	  	$(this).parent().parent().parent().find('.audios, .biography, .place_informations, .row.details').css('height',max_column + 50);
-
-
-
-		$(this).parent().parent().parent().find('.row.details').slideDown(300);
+		$(this).parent().parent().find('.row.details').slideDown(300);
 		$(this).parent().parent().addClass('expanded').removeClass('not_expanded');
 		$(this).text('less information');
 	});
 
 	$(document).on('click','.concert_item.expanded .expand_button',function(){
-		$(this).parent().parent().parent().find('.row.details').slideUp(300);
+		$(this).parent().parent().find('.row.details').slideUp(300);
 		$(this).parent().parent().addClass('not_expanded').removeClass('expanded');
 		$(this).text('more information');
 	});

@@ -290,6 +290,8 @@ p {margin: 0px;}
             .suggestions {}
               .suggestions .title { display: inline-block; padding-right: 7px;}
               .suggestion {padding:0px 5px;}
+
+  .result_label h3 { margin-bottom: 30px; }
 }
 
 /* Used to alter styles for screens at least 1280px wide. */

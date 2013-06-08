@@ -11,13 +11,11 @@ $(document).ready(function(){
 		$(this).addClass('not_expanded').removeClass('expanded');
 	});
 		
-
 	$(document).on('initialization',function(){
 		$('.header_content').css('width','100%');
 		$('.header_content .header_form').fadeOut(0).fadeIn(300);
 		$('.row.details').slideUp(0);
 	});
-
 
 	// expand the boxs results
 	$(document).on('click','.concert_item.not_expanded .expand_button, .concert_item .expand_button',function(){

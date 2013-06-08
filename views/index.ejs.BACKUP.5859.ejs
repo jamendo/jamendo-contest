@@ -202,8 +202,12 @@
           html+='Sorry, I did not find any concerts for '+search+'.';
         }
         html+='</h3></div></div>';
+<<<<<<< HEAD
+        if (parseInt(search) == search) {
+=======
 
         if (parseInt(id) == id) {
+>>>>>>> michal
           html="";
         } else {
           $('.main').append(html);
@@ -214,18 +218,19 @@
           $('.main').append(makeListing(concerts[i]));
           addthis.toolbox(".addthis_toolbox");
         };    
-        
+<<<<<<< HEAD
+        $('#page').addClass('list').removeClass('home loading');
         $(document).trigger('initialization');    
-
+=======
         $('.concert_item').each(function(){
           $(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
           $('.row.details').slideUp(0);
         });
-        $('#page').addClass('list').removeClass('home loading');
         $(document).trigger('initialization');   
         if (parseInt(id) == id) {
           $('.concert_item.not_expanded .expand_button, .concert_item .expand_button').trigger('click');   
         }
+>>>>>>> michal
       }
 
       function getTracks(id) {
@@ -288,12 +293,20 @@
       }
 
       function makeListing(content) {
-        if(!content.artist_image) content.artist_image = "https://raw.github.com/coldping/jamendo-contest/greg/public/img/foo_artist.jpg";
-
+<<<<<<< HEAD
         var html = '\
         <div class="concert_item" id="'+content.id+'">\
           <div class="row introduction concert_item_part">\
             <div class="illustration large-3 small-6 columns">\
+=======
+        if(!content.artist_image) content.artist_image = "https://raw.github.com/coldping/jamendo-contest/greg/public/img/foo_artist.jpg"; 
+        var html = '<div id="'+content.id+'" class="row content result_listing "> \
+        <div class="row concert_row">\
+          <div class="small-1 columns height"></div>\
+          <div class="small-10 columns concert_item not_expanded">\
+            <div class="row introduction">\
+              <div class="small-3 columns illustration float">\
+>>>>>>> michal
                 <div class="overlay_illustration"><img src="/img/overlay_picture.png" /></div>\
                 <div class="illustration_img"><img src="'+content.artist_image+'" /></div>\
             </div>\

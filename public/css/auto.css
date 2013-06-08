@@ -48,6 +48,7 @@
 	line-height: 1.5;
 	min-height: 0; /* support: IE7 */
 	font-weight: normal;
+	text-transform: uppercase;
 }
 .ui-menu .ui-menu-item a.ui-state-focus,
 .ui-menu .ui-menu-item a.ui-state-active {

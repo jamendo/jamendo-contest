@@ -129,7 +129,7 @@
 
       function showIndex(data) {
         $('.main').empty();
-        $('.main').append('<div class="row content home center"><div class="hp_form_wrapper center"><div class="hp_slogan"><div class="slogan_decoration left"></div><h1> FIND CONCERTS NEAR YOUR PLACE </h1><div class="slogan_decoration right"></div></div><form class="hp_form"><input  id="main_input" type="text" class="float" placeholder="TYPE YOUR PLACE HERE..." /><input type="submit" class="float green_stripped" value="FIND!" /></form><div class="suggestions clear"><div class="title">Hot Places :</div></div></div><div class="men"></div> </div></div>');
+        $('.main').append('<div class="row content home center"><div class="hp_form_wrapper center"><div class="hp_slogan"><div class="slogan_decoration left"></div><h1> FIND CONCERTS NEAR YOUR PLACE </h1><div class="slogan_decoration right"></div></div><form class="hp_form"><input  id="main_input" type="text" class="float" placeholder="TYPE YOUR PLACE HERE..." /><input type="submit" class="float green_stripped" value="FIND!" /></form><div class="suggestions clear"><div class="title">Hot Places :</div><a class="suggestion" href="paris">Paris</a><a class="suggestion" href="roma">Roma</a><a class="suggestion" href="toulouse">Toulouse</a><a class="suggestion" href="london">London</a><a class="suggestion" href="lyon">Lyon</a></div></div><div class="men"></div> </div></div>');
           var sortArray = new Array();
           var cityArray = new Array();
           for (key in data) {
@@ -140,10 +140,6 @@
           });
           for (var i = 0; i < sortArray.length; i++) {
             cityArray[i]=sortArray[i].name;
-          };
-
-          for (var i = 0; i < 6; i++) {
-            $('.suggestions').append('<a class="suggestion" href="/city/'+cityArray[i]+'">'+cityArray[i]+'</a>');
           };
           
 
@@ -193,7 +189,7 @@
 
       function showConcerts(concerts, search) {
         $('.main').empty();
-        var id = search;
+        $('#top_input').val(search);
         search = '<span style="text-transform:uppercase">'+search+'</span>';
         var html = '<div class="row"><div class="small-12 columns result_label"><h3>';
         if(concerts.length>0) {
@@ -202,30 +198,17 @@
           html+='Sorry, I did not find any concerts for '+search+'.';
         }
         html+='</h3></div></div>';
-
-        if (parseInt(id) == id) {
+        if (parseInt(search) == search) {
           html="";
         } else {
           $('.main').append(html);
-          $('#top_input').val(id);
         }
-
         for (var i = 0; i < concerts.length; i++) {
           $('.main').append(makeListing(concerts[i]));
           addthis.toolbox(".addthis_toolbox");
         };    
-        
-        $(document).trigger('initialization');    
-
-        $('.concert_item').each(function(){
-          $(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
-          $('.row.details').slideUp(0);
-        });
         $('#page').addClass('list').removeClass('home loading');
-        $(document).trigger('initialization');   
-        if (parseInt(id) == id) {
-          $('.concert_item.not_expanded .expand_button, .concert_item .expand_button').trigger('click');   
-        }
+        $(document).trigger('initialization');    
       }
 
       function getTracks(id) {
@@ -288,8 +271,6 @@
       }
 
       function makeListing(content) {
-        if(!content.artist_image) content.artist_image = "https://raw.github.com/coldping/jamendo-contest/greg/public/img/foo_artist.jpg";
-
         var html = '\
         <div class="concert_item" id="'+content.id+'">\
           <div class="row introduction concert_item_part">\

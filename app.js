@@ -6,8 +6,7 @@ var express = require('express')
   , http = require('http')
   , Jamendo = require('jamendo')
   , path = require('path')
-  , $ = require('jquery')
-  , gm = require('googlemaps');
+  , $ = require('jquery');
 
 
 var app = express();
@@ -35,8 +34,6 @@ var jamendo = new Jamendo({
  version   : 'v3.0',        // Use the specified API version
  debug     : false         // Print the whole response object and body in the console
 });
-
-gm.config({key: "AIzaSyA6KF1e00jijd0fiY_IfN4dciCUwXU8nT4"});
 
 app.get('/', function(req, res){
   res.render('index', {getData: false, title: "Jamenco"});

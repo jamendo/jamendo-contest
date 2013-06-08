@@ -129,7 +129,7 @@
 
       function showIndex(data) {
         $('.main').empty();
-        $('.main').append('<div class="row content home center"><div class="hp_form_wrapper center"><div class="hp_slogan"><div class="slogan_decoration left"></div><h1> FIND CONCERTS NEAR YOUR PLACE </h1><div class="slogan_decoration right"></div></div><form class="hp_form"><input  id="main_input" type="text" class="float" placeholder="TYPE YOUR PLACE HERE..." /><input type="submit" class="float green_stripped" value="FIND!" /></form><div class="suggestions clear"><div class="title">Hot Places :</div></div></div><div class="men"></div> </div></div>');
+        $('.main').append('<div class="row content home center"><div class="hp_form_wrapper center"><div class="hp_slogan"><div class="slogan_decoration left"></div><h1> FIND CONCERTS NEAR YOUR PLACE </h1><div class="slogan_decoration right"></div></div><form class="hp_form"><input  id="main_input" type="text" class="float" placeholder="TYPE YOUR PLACE HERE..." /><input type="submit" class="float green_stripped" value="FIND!" /></form><div class="suggestions clear"><div class="title">Hot Places :</div><a class="suggestion" href="paris">Paris</a><a class="suggestion" href="roma">Roma</a><a class="suggestion" href="toulouse">Toulouse</a><a class="suggestion" href="london">London</a><a class="suggestion" href="lyon">Lyon</a></div></div><div class="men"></div> </div></div>');
           var sortArray = new Array();
           var cityArray = new Array();
           for (key in data) {
@@ -141,12 +141,7 @@
           for (var i = 0; i < sortArray.length; i++) {
             cityArray[i]=sortArray[i].name;
           };
-
-          for (var i = 0; i < 6; i++) {
-            $('.suggestions').append('<a class="suggestion" href="/city/'+cityArray[i]+'">'+cityArray[i]+'</a>');
-          };
           
-
           nb_row = Math.ceil(wheight / 45);
           men_per_row = 47;
           total_men = nb_row * men_per_row;
@@ -154,28 +149,16 @@
           {
             $('.men').append('<div class="man"></div>')
           }
-          // $(window).resize(function(){
-          //   $('.men').empty();
-          //   // nb_row = Math.ceil(wheight / 45);
-          //   // men_per_row = 47;
-          //   // total_men = nb_row * men_per_row;
-          //   // for(i=0;i<total_men;i++)
-          //   // {
-          //   //   $('.men').append('<div class="man"></div>')
-          //   // }
-          // });
 
-          top_hp_form = ((Math.ceil((nb_row - 7)/2))-1)*33;
+            top_hp_form = ((nb_row - 7)/2)*33;
           console.log((nb_row - 7)/2);
           console.log(top_hp_form);
           $('.hp_form_wrapper').css('top',top_hp_form);
-          //$('.home.center').css('height',$('.men').height()+40);
+          $('.home.center').css('height',$('.men').height()+40);
 
           $('#main_input').autocomplete({
             source: cityArray
           });
-
-          $('#page').addClass('home').removeClass('list loading');
       }
 
       function showLoading() {
@@ -186,14 +169,12 @@
           $('.content.loading').css('top',top_loading); 
 
           $('.home.center').css('height',$('.men').height()+40);
-
-          $('#page').addClass('loading').removeClass('home list');
       }
 
 
       function showConcerts(concerts, search) {
         $('.main').empty();
-        var id = search;
+        $('#top_input').val(search);
         search = '<span style="text-transform:uppercase">'+search+'</span>';
         var html = '<div class="row"><div class="small-12 columns result_label"><h3>';
         if(concerts.length>0) {
@@ -202,30 +183,20 @@
           html+='Sorry, I did not find any concerts for '+search+'.';
         }
         html+='</h3></div></div>';
-
         if (parseInt(id) == id) {
           html="";
         } else {
           $('.main').append(html);
-          $('#top_input').val(id);
         }
-
         for (var i = 0; i < concerts.length; i++) {
           $('.main').append(makeListing(concerts[i]));
           addthis.toolbox(".addthis_toolbox");
         };    
-        
-        $(document).trigger('initialization');    
-
         $('.concert_item').each(function(){
           $(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
           $('.row.details').slideUp(0);
         });
-        $('#page').addClass('list').removeClass('home loading');
-        $(document).trigger('initialization');   
-        if (parseInt(id) == id) {
-          $('.concert_item.not_expanded .expand_button, .concert_item .expand_button').trigger('click');   
-        }
+        $(document).trigger('initialization');    
       }
 
       function getTracks(id) {
@@ -237,7 +208,7 @@
             console.log(id);
             for (var i = 0; i < $('.audios.'+id).length; i++) {
               $('.audios.'+id).eq(i).empty();
-              $('.audios.'+id).eq(i).append('<h4>Songs</h4><ul class="songs"></ul>');
+              $('.audios.'+id).eq(i).append('<ul></ul>');
               for (var j = 0; j < tracks.length; j++) {
                 var song = '<li class="song">'
                 song+='<div class="player float"><audio id="'+tracks[j].id+'" src="'+tracks[j].audio+'" preload="none" /></div>';
@@ -248,6 +219,10 @@
                 audiojs.create($('.audios.'+id).eq(i).find('#'+tracks[j].id), {css: false});
               };
             };
+            $('.concert_item').each(function(){
+              max_column = Math.max($(this).find('.audios ul').height(),$(this).find('.biography').height(),$(this).find('.place_informations').height());
+              $(this).find('.audios, .biography, .place_informations, .row.details').css('height',max_column + 50);
+            });
           });
       }
 
@@ -288,68 +263,64 @@
       }
 
       function makeListing(content) {
-        if(!content.artist_image) content.artist_image = "https://raw.github.com/coldping/jamendo-contest/greg/public/img/foo_artist.jpg";
-
-        var html = '\
-        <div class="concert_item" id="'+content.id+'">\
-          <div class="row introduction concert_item_part">\
-            <div class="illustration large-3 small-6 columns">\
+        var html = '<div id="'+content.id+'" class="row content result_listing "> \
+        <div class="row concert_row">\
+          <div class="small-1 columns height"></div>\
+          <div class="small-10 columns concert_item not_expanded">\
+            <div class="row introduction">\
+              <div class="small-3 columns illustration float">\
                 <div class="overlay_illustration"><img src="/img/overlay_picture.png" /></div>\
                 <div class="illustration_img"><img src="'+content.artist_image+'" /></div>\
-            </div>\
-            <div class="description large-6 small-6 columns">\
-              <h3 class="artist_name">'+content.artist_name+'</h3>\
-              <p class="description_item genre">Electronic </p>\
-              <p class="description_item date">'+content.date+'</p>\
-              <p class="description_item place">'+decodeURIComponent(escape(content.location_name))+'</p>\
-              <p class="description_item price">'+content.price+'</p>\
-              <div class="buttons actions">\
-                <div class="button_jam action share green_stripped not_expanded">Spread it</div>\
-                <div class="share_content addthis_toolbox addthis_default_style" addthis:url="http://jamen.co/concert/'+content.id+'" addthis:title="'+content.artist_name+' will play in '+content.location_city.toUpperCase()+'!" addthis:description="'+content.description+'">\
-                  <a class="addthis_button_preferred_1"></a>\
-                  <a class="addthis_button_preferred_2"></a>\
-                  <a class="addthis_button_preferred_3"></a>\
-                  <a class="addthis_button_preferred_4"></a>\
-                </div>';
-               if(content.buyurl) html+='\
-                <div class="button_jam action book green_stripped">\
-                  <a href="'+content.buyurl+'"  target="_blank" />Book it</a>\
-                </div>';
-       html+='</div>\
-            </div>\
-            <div class="large-3 columns map">\
-               <img src="http://maps.googleapis.com/maps/api/staticmap?center='+content.location_city+', '+content.location_address+'&zoom=13&size=300x300&markers=icon:http://raw.github.com/coldping/jamendo-contest/michal/public/img/jamenco-map-icon.png%7C'+content.location_city+', '+content.location_address+'&key=AIzaSyA6KF1e00jijd0fiY_IfN4dciCUwXU8nT4&sensor=false" />\
-            </div>\
-          </div>\
-          \
-          <div class="details row  concert_item_part">\
-            <div id="'+content.artist_id+'" class="audios large-3 small-10 small-centered large-uncentered columns '+content.artist_id+' ">\
-              <div class="loader small">\
-                <div class="loader_spin spin_1"></div>\
-                <div class="loader_spin spin_2"></div>\
-                <div class="loader_logo"></div>\
+              </div>\
+              <div class="description small-6 columns float">\
+                <h3 class="artist_name">'+content.artist_name+'</h3>\
+                <p class="description_item genre">Electronic </p>\
+                <p class="description_item date">'+content.date+'</p>\
+                <p class="description_item place">'+decodeURIComponent(escape(content.location_name))+'</p>\
+                <p class="description_item price">'+content.price+'</p>\
+                <div class="buttons actions">\
+                   <div class="button_jam action share green_stripped not_expanded">Spread it</div>\
+                  <div class="share_content">\
+                     <div class="addthis_toolbox addthis_default_style" addthis:url="http://jamen.co/concert/'+content.id+'" addthis:title="'+content.artist_name+' will play in '+content.location_city.toUpperCase()+'!" addthis:description="'+content.description+'">\
+                      <a class="addthis_button_preferred_1"></a>\
+                      <a class="addthis_button_preferred_2"></a>\
+                      <a class="addthis_button_preferred_3"></a>\
+                      <a class="addthis_button_preferred_4"></a>\
+                    </div>\
+                  </div>';
+if(content.buyurl) html+='<div class="button_jam action book green_stripped"><a href="'+content.buyurl+'"  target="_blank" />Book it</a></div>';
+               html+='</div>\
+              </div>\
+              <div class="small-3 columns map float">\
+                <img src="http://maps.googleapis.com/maps/api/staticmap?center='+content.location_city+', '+content.location_address+'&zoom=13&size=300x300&markers=icon:http://raw.github.com/coldping/jamendo-contest/michal/public/img/jamenco-map-icon.png%7C'+content.location_city+', '+content.location_address+'&key=AIzaSyA6KF1e00jijd0fiY_IfN4dciCUwXU8nT4&sensor=false" />\
               </div>\
             </div>\
-            <div class="biography large-6 small-10 small-centered large-uncentered columns">\
-              <h4>Description</h4>\
-               <p>'+content.description+'</p>\
-               <p><a href="'+content.artist_website+'" target="_blank">'+content.artist_website+'</a>\
+            <div class="row details">\
+              <div id="'+content.artist_id+'" class="audios '+content.artist_id+' small-3 columns float">\
+                <div class="loader small">\
+                  <div class="loader_spin spin_1"></div>\
+                  <div class="loader_spin spin_2"></div>\
+                  <div class="loader_logo"></div>\
+                </div>\
+              </div>\
+              <div class="biography small-6 columns float">\
+                <p>'+content.description+'</p>\
+                <p><a href="'+content.artist_website+'" target="_blank">'+content.artist_website+'</a>\
+              </div>\
+              <div class="place_informations small-3 columns float">\
+                <p class="address">'+content.location_address+'</p> \
+                <p>'+content.location_city+'</p>\
+                <p><a href="http://maps.google.com/maps?q='+content.location_city+', '+content.location_address+'">Show on map</a></p>\
+              </div>\
             </div>\
-            <div class="place_informations large-3 small-10 small-centered large-uncentered columns">\
-              <h4>Place</h4>\
-              <p class="address">'+content.location_address+'</p> \
-              <p>'+content.location_city+'</p>\
-              <p><a href="http://maps.google.com/maps?q='+content.location_city+', '+content.location_address+'" target="_blank">Show on map</a></p>\
+            <div class="row">\
+              <div class="small-12 columns expand_button red_stripped">More Informations</div>\
             </div>\
           </div>\
-          <div class="row">\
-             <div class="large-12 small-12 columns expand_button red_stripped">More Informations</div>\
-          </div>\
+          <div class="small-1 columns height"></div>\
         </div>';
-      return html;
+        return html;
       }
-
-
 
     </script>
   </body>

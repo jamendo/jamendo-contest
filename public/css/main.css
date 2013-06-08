@@ -202,6 +202,7 @@ p {margin: 0px;}
 
 /* We use this media query to add styles to any device that supports media queries */
 @media only screen { 
+   .home.center { min-height:400px; }
    .concert_item {overflow: visible;}
    .map {display: none;}
    .audios { border-right:none; }

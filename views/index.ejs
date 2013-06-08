@@ -142,6 +142,7 @@
             cityArray[i]=sortArray[i].name;
           };
           
+
           nb_row = Math.ceil(wheight / 45);
           men_per_row = 47;
           total_men = nb_row * men_per_row;
@@ -150,11 +151,22 @@
             $('.men').append('<div class="man"></div>')
           }
 
-            top_hp_form = ((nb_row - 7)/2)*33;
+          // $(window).resize(function(){
+          //   $('.men').empty();
+          //   // nb_row = Math.ceil(wheight / 45);
+          //   // men_per_row = 47;
+          //   // total_men = nb_row * men_per_row;
+          //   // for(i=0;i<total_men;i++)
+          //   // {
+          //   //   $('.men').append('<div class="man"></div>')
+          //   // }
+          // });
+
+          top_hp_form = ((nb_row - 7)/2)*33;
           console.log((nb_row - 7)/2);
           console.log(top_hp_form);
           $('.hp_form_wrapper').css('top',top_hp_form);
-          $('.home.center').css('height',$('.men').height()+40);
+          //$('.home.center').css('height',$('.men').height()+40);
 
           $('#main_input').autocomplete({
             source: cityArray

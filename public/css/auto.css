@@ -9,7 +9,7 @@
 	cursor: default;
 	z-index: 500;
 	background: white;
-	border: 4px solid #e95a4c;
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
 	border-top: none;
 	font-size: 18px;
 }

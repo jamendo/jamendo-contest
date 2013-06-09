@@ -11,7 +11,15 @@ Technology:
 * HTML 5, CSS 3
 * fully responsive design
 
-## Screenshots 
+## Screenshots
+
+![Screenshot](https://raw.github.com/coldping/jamendo-contest/master/screenshots/ss1.png)
+
+![Screenshot](https://raw.github.com/coldping/jamendo-contest/master/screenshots/ss2.png)
+
+![Screenshot](https://raw.github.com/coldping/jamendo-contest/master/screenshots/ss3.png)
+
+![Screenshot](https://raw.github.com/coldping/jamendo-contest/master/screenshots/mobile.png)
 
 ## Licence 
 

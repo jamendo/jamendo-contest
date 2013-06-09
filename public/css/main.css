@@ -43,7 +43,7 @@ a:hover { color:red;}
 .header_content,
 a,
 .biography a {transition: all 0.6s; -webkit-transition: all 0.6s; -moz-transition: all 0.6s; -o-transition: all 0.6s; -ms-transition: all 0.6s;}
-
+.suggestion {text-transform: uppercase;}
 .red_stripped {background: url('../img/red_stripped.jpg'); text-shadow:0px 0px 3px rgba(0,0,0,0.5);}
   .red_stripped:hover {background: url('../img/red_stripped.jpg') 100px 0px; box-shadow:0px 0px 3px rgba(0,0,0,0.5);}
 .green_stripped {background: url('../img/green_stripped.jpg'); text-shadow:0px 0px 3px rgba(0,0,0,0.5);}

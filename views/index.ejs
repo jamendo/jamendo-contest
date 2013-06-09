@@ -15,10 +15,7 @@
     <link rel="stylesheet" href="/css/auto.css" />
     <script src="/js/vendor/custom.modernizr.js"></script>
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f600503653651b3"></script>
-    
-    <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <!-- History.js -->
     <script src="//browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js"></script>
     <script src="/js/audio.min.js"></script>
     <script src="/js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -214,11 +211,11 @@
           $('.main').append(makeListing(concerts[i]));
           addthis.toolbox(".addthis_toolbox");
         };    
-        
+
         $(document).trigger('initialization');    
 
         $('.concert_item').each(function(){
-          $(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
+          //$(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
           $('.row.details').slideUp(0);
         });
         $('#page').addClass('list').removeClass('home loading');
@@ -289,7 +286,7 @@
 
       function makeListing(content) {
         if(!content.artist_image) content.artist_image = "https://raw.github.com/coldping/jamendo-contest/greg/public/img/foo_artist.jpg";
-
+        content.description = content.description.replace(/>/g, " ");
         var html = '\
         <div class="concert_item" id="'+content.id+'">\
           <div class="row introduction concert_item_part">\
@@ -299,7 +296,6 @@
             </div>\
             <div class="description large-6 small-6 columns">\
               <h3 class="artist_name">'+content.artist_name+'</h3>\
-              <p class="description_item genre">Electronic </p>\
               <p class="description_item date">'+content.date+'</p>\
               <p class="description_item place">'+decodeURIComponent(escape(content.location_name))+'</p>\
               <p class="description_item price">'+content.price+'</p>\

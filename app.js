@@ -44,12 +44,6 @@ app.get('/city/:id', function(req, res){
   res.render('index', {getData: req.params.id, title: "Jamenco"});
 });
 
-app.get('/test', function(req, res){
-  
-  jamendo.concerts({ limit: 100, datebetween: [ new Date(), '2013-10-10' ], location_city: 'paris', order: 'date_desc'}, function(error, concerts){
-      res.render('test', {concerts: concerts.results});
-  });
-});
 
 app.get('/concert/:id', function(req, res){
   res.render('index', {getData: req.params.id, title: "Jamenco"});

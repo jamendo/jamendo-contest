@@ -3,6 +3,14 @@
 Jamenco is a concert finding application created for [Jamendo App Contest](http://blog.jamendo.com.s3.amazonaws.com/wp-content/uploads/2012/04/jamendo_logo2.png "Jamendo App Contest 2013").
 
 
+[Live Demo](http://www.jamen.co)
+
+Technology:
+
+* developed with node.js
+* HTML 5, CSS 3
+* fully responsive design
+
 ## Screenshots 
 
 ## Licence 

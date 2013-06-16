@@ -85,7 +85,7 @@ body { background: #e7e5ce; font-family: 'akzidenz_cond', arial; color:#303030; 
             .hp_form input[type="submit"] {padding-top: 5px; height: 70px; width:100px; font-size:20px; text-transform:uppercase; font-size: 25px; color: white;  border: none; }
             .suggestions {}
               .suggestions .title { display: inline-block; padding-right: 7px;}
-              .suggestion {padding:0px 5px;}
+              .suggestion {padding:0px 5px; display: inline-block;}
 
         .men { position: absolute; top: 0px;}      
           .man {display: block; width:13px; height:31px; margin:1px 4px; float: left; background:url('../img/sprite_dancer.png') 0px 0px;}
@@ -212,6 +212,7 @@ p {margin: 0px;}
    .introduction { overflow: visible; height:240px;}
    .button_jam.action {float: left; margin-right:5px; width: 80px;}
    .expand_button {padding: 7px 0px;}
+   .share_content {height: 30px; width: 100px; }
    
    .overlay_illustration img { height:220px; width: 100%; }
    .description { padding: 10px 10px 10px 20px;}
@@ -225,8 +226,8 @@ p {margin: 0px;}
 
    .top-bar { overflow: hidden; height: 160px;}
    .header_form, .logo {float: none;}
-   .header_form { margin: 0px 37px 3px 23px;}
-      .header_form input[type="text"] { padding-top: 10px; }
+   .header_form { margin: 0px 37px 3px 23px; }
+      .header_form input[type="text"] { padding-top: 10px; width: 150px; }
    .result_label h3 { font-size: 20px; margin-bottom: 50px;}
    .top-bar .glossy_header {display: none;}
    .top-bar .red_bar {top: 157px;}
@@ -234,8 +235,11 @@ p {margin: 0px;}
    .slogan_decoration {display: none;}
    .men {display: none;}
    .hp_form_wrapper {height: 240px; width: 100%;  }
-   .hp_slogan h1 { font-size: 26px; }
-   .hp_form input[type="text"] { width: 215px; font-size: 20px;}
+   .hp_slogan h1 {  font-size: 18px; }
+   .hp_form input[type="text"] { width: 155px; font-size: 16px;}
+
+   .hp_form input[type="submit"] { width: 80px; }
+   .header_form input[type="submit"] { width: 60px; }
 }
 
 /* Used to alter styles for screens at least 768px wide. This is where the grid changes. */

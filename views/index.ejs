@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="Keywords" content="jamenco, find, concert, search engine, jamendo, api" />
+    <meta name="Description" content="Jamenco, find concerts near your place" />
+    <title><%= title %></title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/foundation.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/player.css" />
+    <link rel="stylesheet" href="/css/auto.css" />
+    <script src="/js/vendor/custom.modernizr.js"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f600503653651b3"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js"></script>
+    <script src="/js/audio.min.js"></script>
+    <script src="/js/jquery-ui-1.10.3.custom.min.js"></script>
+  </head>
+  <body>
+  <div id="page">
+    <nav class="top-bar contain-to-grid">
+
+      <div class="row">
+      <div class="small-12 columns">
+        <div class="header_content center">
+          <div class="logo float"><a href="/"><img src="/img/logo_header.png" /></a></div> 
+          <form class="header_form float">
+            <input id="top_input" type="text" class="float" placeholder="TYPE YOUR PLACE HERE..." value="" />
+            <input type="submit" class="float green_stripped" value="FIND!" />
+          </form>
+          <div class="clear"></div> 
+
+      </div> 
+      </div> 
+      </div> 
+      
+      <div class="glossy_header"></div> 
+      <div class="red_bar"></div> 
+    </nav>
+    <div class="main">
+      <div class="content loading center">
+        <div class="loader center">
+          <div class="loader_spin spin_1"></div>
+          <div class="loader_spin spin_2"></div>
+          <div class="loader_logo"></div>
+        </div>
+        
+        <h3> THE AWESOMENESS IS COMING... </h3>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <div class="red_bar"></div> 
+    <div class="text center">JAMEN.CO&nbsp;&nbsp;//&nbsp;&nbsp;All RIGHTS RESERVED&nbsp;&nbsp;//&nbsp;&nbsp;A PROJECT BASED ON <a href="http://www.jamendo.com/" target="_blank">JAMENDO</a> API&nbsp;&nbsp;//&nbsp;&nbsp;CODED BY <a href="http://www.michalkowalkowski.com/" target="_blank">MICHAL KOWALKOWSKI</a> & DESIGN BY <a href="http://www.creativegreg.com/" target="_blank"> CREATIVEGREG </a> </div>
+  </div>
+
+  <script src="/js/foundation.min.js"></script>
+  <script src="/js/main.js"></script>
+
+  <script>
+    $(document).foundation();
+  </script>
+    <script type="text/javascript">
+      wheight = $(window).height();
+      top_loading = wheight/2 - 200;
+      $('.content.loading').css('top',top_loading); 
+
+
+      <% if(getData===false) { %>
+        getCities();
+      <% } else { %>
+        getConcerts("<%= getData %>", "<%= getData %>");
+      <% } %>
+
+      //var State = false;
+      History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+          var State = History.getState(); // Note: We are using History.getState() instead of event.state
+          console.log(State);
+          if(State.title=="") return false;
+          if(State.data.page=="concerts") {
+            showConcerts(State.data.concerts, State.data.search);
+          } else {
+            showIndex(State.data.cities)
+          }
+      });
+
+
+      $(document).on('click', '.city', function(e){
+          e.preventDefault();
+          $('.main').empty();
+          showLoading();
+          var city = $(this).text();
+         // getConcerts(city);
+      });
+
+      $(document).on('click', '.expand', function(){
+          $('.main').empty();
+          showLoading();
+          console.log($(this).attr('id'));
+          $.ajax({
+            url: "/getTracks/"+$(this).attr('id'),
+            type: "GET",
+            data: 'json',
+          }).success(function ( tracks ) {
+            $('.main').empty();
+            for (var i = 0; i < tracks.length; i++) {
+              $('.main').append('<audio src="'+tracks[i].audio+'" preload="none" />');
+            };
+            audiojs.events.ready(function() {
+              var as = audiojs.createAll({css: false});
+            });
+          });
+      });
+
+      $(document).on('submit', 'form', function(e) {
+          e.preventDefault();
+          $('.main').empty();
+          showLoading();
+          getConcerts($(this).find('input').val());
+      });
+
+      function showIndex(data) {
+        $('.main').empty();
+        $('.main').append('<div class="row content home center"><div class="hp_form_wrapper center"><div class="hp_slogan"><div class="slogan_decoration left"></div><h1> FIND CONCERTS NEAR YOUR PLACE </h1><div class="slogan_decoration right"></div></div><form class="hp_form"><input  id="main_input" type="text" class="float" placeholder="TYPE YOUR PLACE HERE..." /><input type="submit" class="float green_stripped" value="FIND!" /></form><div class="suggestions clear"><div class="title">Hot Places :</div></div></div><div class="men"></div> </div></div>');
+          var sortArray = new Array();
+          var cityArray = new Array();
+          for (key in data) {
+              sortArray.push({name: key, concerts: data[key]});
+          }
+          sortArray.sort(function(a,b){
+            return b.concerts-a.concerts;
+          });
+          for (var i = 0; i < sortArray.length; i++) {
+            cityArray[i]=sortArray[i].name;
+          };
+
+          for (var i = 0; i < 6; i++) {
+            $('.suggestions').append('<a class="suggestion" href="/city/'+cityArray[i]+'">'+cityArray[i]+'</a>');
+          };
+          
+
+          nb_row = Math.ceil(wheight / 45);
+          men_per_row = 47;
+          total_men = nb_row * men_per_row;
+          for(i=0;i<total_men;i++)
+          {
+            $('.men').append('<div class="man"></div>')
+          }
+          // $(window).resize(function(){
+          //   $('.men').empty();
+          //   // nb_row = Math.ceil(wheight / 45);
+          //   // men_per_row = 47;
+          //   // total_men = nb_row * men_per_row;
+          //   // for(i=0;i<total_men;i++)
+          //   // {
+          //   //   $('.men').append('<div class="man"></div>')
+          //   // }
+          // });
+
+          top_hp_form = ((Math.ceil((nb_row - 7)/2))-1)*33;
+          console.log((nb_row - 7)/2);
+          console.log(top_hp_form);
+          $('.hp_form_wrapper').css('top',top_hp_form);
+          //$('.home.center').css('height',$('.men').height()+40);
+
+          $('#main_input').autocomplete({
+            source: cityArray
+          });
+
+          $('#page').addClass('home').removeClass('list loading');
+      }
+
+      function showLoading() {
+        $('.main').empty();
+        $('.main').append('<div class="content loading center"><div class="loader center"><div class="loader_spin spin_1"></div><div class="loader_spin spin_2"></div><div class="loader_logo"></div></div><h3> THE AWESOMENESS IS COMING... </h3></div>');
+                  // loading top 
+          top_loading = wheight/2 - 200;
+          $('.content.loading').css('top',top_loading); 
+
+          $('.home.center').css('height',$('.men').height()+40);
+
+          $('#page').addClass('loading').removeClass('home list');
+      }
+
+
+      function showConcerts(concerts, search) {
+        $('.main').empty();
+        var id = search;
+        search = '<span style="text-transform:uppercase">'+search+'</span>';
+        var html = '<div class="row"><div class="small-12 columns result_label"><h3>';
+        if(concerts.length>0) {
+          html+='For '+search+', I found '+concerts.length+' upcoming concerts :';
+        } else {
+          html+='Sorry, I did not find any concerts for '+search+'.';
+        }
+        html+='</h3></div></div>';
+
+        if (parseInt(id) == id) {
+          html="";
+        } else {
+          $('.main').append(html);
+          $('#top_input').val(id);
+        }
+
+        for (var i = 0; i < concerts.length; i++) {
+          $('.main').append(makeListing(concerts[i]));
+          addthis.toolbox(".addthis_toolbox");
+        };    
+
+        $(document).trigger('initialization');    
+
+        $('.concert_item').each(function(){
+          //$(this).find('.audios, .biography, .place_informations').css('height',$('.row.details').height());
+          $('.row.details').slideUp(0);
+        });
+        $('#page').addClass('list').removeClass('home loading');
+        $(document).trigger('initialization');   
+        if (parseInt(id) == id) {
+          $('.concert_item.not_expanded .expand_button, .concert_item .expand_button').trigger('click');   
+        }
+      }
+
+      function getTracks(id) {
+          $.ajax({
+            url: "/getTracks/"+id,
+            type: "GET",
+            data: 'json',
+          }).success(function ( tracks ) {
+            console.log(id);
+            for (var i = 0; i < $('.audios.'+id).length; i++) {
+              $('.audios.'+id).eq(i).empty();
+              $('.audios.'+id).eq(i).append('<h4>Songs</h4><ul class="songs"></ul>');
+              for (var j = 0; j < tracks.length; j++) {
+                var song = '<li class="song">'
+                song+='<div class="player float"><audio id="'+tracks[j].id+'" src="'+tracks[j].audio+'" preload="none" /></div>';
+                song+='<div class="name float">'+tracks[j].name+'</div>';
+                song+='<div class="clear"></div>';
+                song+='</li>';
+                $('.audios.'+id+' ul').eq(i).append(song);
+                audiojs.create($('.audios.'+id).eq(i).find('#'+tracks[j].id), {css: false});
+              };
+            };
+          });
+      }
+
+      function getConcerts(id) {
+          if (parseInt(id) == id) {
+            var city = false;
+          } else {
+            var city = true;
+          }
+          $.ajax({
+            url: "/getConcerts/"+id,
+            type: "GET",
+            data: 'json',
+          }).success(function ( concerts ) {
+            if(city) {
+              var link = "/city/"+id;
+              var title = "Jamenco - "+id.toUpperCase();
+            } else {
+              var link = "/concert/"+id;
+              var title = "Jamenco - "+concerts[0].artist_name.toUpperCase();              
+            }
+            console.log(concerts);
+            History.pushState({concerts: concerts, page: "concerts", search: id}, title, link);
+            History.Adapter.trigger(window,'statechange');
+          });      
+      }
+
+      function getCities() {
+          $.ajax({
+            url: "/getCities/",
+            type: "GET",
+            data: 'json',
+          }).success(function ( cities ) {
+            console.log(cities);
+            History.pushState({cities: cities, page: "index"}, "Jamenco", "/");
+            History.Adapter.trigger(window,'statechange'); 
+          });      
+      }
+
+      function makeListing(content) {
+        if(!content.artist_image) content.artist_image = "https://raw.github.com/coldping/jamendo-contest/greg/public/img/foo_artist.jpg";
+        content.description = content.description.replace(/>/g, " ");
+        var html = '\
+        <div class="concert_item" id="'+content.id+'">\
+          <div class="row introduction concert_item_part">\
+            <div class="illustration large-3 small-6 columns">\
+                <div class="overlay_illustration"><img src="/img/overlay_picture.png" /></div>\
+                <div class="illustration_img"><img src="'+content.artist_image+'" /></div>\
+            </div>\
+            <div class="description large-6 small-6 columns">\
+              <h3 class="artist_name">'+content.artist_name+'</h3>\
+              <p class="description_item date">'+content.date+'</p>\
+              <p class="description_item place">'+decodeURIComponent(escape(content.location_name))+'</p>\
+              <p class="description_item price">'+content.price+'</p>\
+              <div class="buttons actions">\
+                <div class="button_jam action share green_stripped not_expanded">Spread it</div>\
+                <div class="share_content addthis_toolbox addthis_default_style" addthis:url="http://jamen.co/concert/'+content.id+'" addthis:title="'+content.artist_name+' will play in '+content.location_city.toUpperCase()+'!" addthis:description="'+content.description+'">\
+                  <a class="addthis_button_preferred_1"></a>\
+                  <a class="addthis_button_preferred_2"></a>\
+                  <a class="addthis_button_preferred_3"></a>\
+                  <a class="addthis_button_preferred_4"></a>\
+                </div>';
+               if(content.buyurl) html+='\
+                <div class="button_jam action book green_stripped">\
+                  <a href="'+content.buyurl+'"  target="_blank" />Book it</a>\
+                </div>';
+       html+='</div>\
+            </div>\
+            <div class="large-3 columns map">\
+               <img src="http://maps.googleapis.com/maps/api/staticmap?center='+content.location_city+', '+content.location_address+'&zoom=13&size=300x300&markers=icon:http://raw.github.com/coldping/jamendo-contest/michal/public/img/jamenco-map-icon.png%7C'+content.location_city+', '+content.location_address+'&key=AIzaSyA6KF1e00jijd0fiY_IfN4dciCUwXU8nT4&sensor=false" />\
+            </div>\
+          </div>\
+          \
+          <div class="details row  concert_item_part">\
+            <div id="'+content.artist_id+'" class="audios large-3 small-10 small-centered large-uncentered columns '+content.artist_id+' ">\
+              <div class="loader small">\
+                <div class="loader_spin spin_1"></div>\
+                <div class="loader_spin spin_2"></div>\
+                <div class="loader_logo"></div>\
+              </div>\
+            </div>\
+            <div class="biography large-6 small-10 small-centered large-uncentered columns">\
+              <h4>Description</h4>\
+               <p>'+content.description+'</p>\
+               <p><a href="'+content.artist_website+'" target="_blank">'+content.artist_website+'</a>\
+            </div>\
+            <div class="place_informations large-3 small-10 small-centered large-uncentered columns">\
+              <h4>Place</h4>\
+              <p class="address">'+content.location_address+'</p> \
+              <p>'+content.location_city+'</p>\
+              <p><a href="http://maps.google.com/maps?q='+content.location_city+', '+content.location_address+'" target="_blank">Show on map</a></p>\
+            </div>\
+          </div>\
+          <div class="row">\
+             <div class="large-12 small-12 columns expand_button red_stripped">More Informations</div>\
+          </div>\
+        </div>';
+      return html;
+      }
+
+
+
+    </script>
+  </body>
+</html>
